@@ -1,8 +1,5 @@
 # 🎓 Simulador de Património ao Final da Faculdade
 
-![Simulador](https://i.imgur.com/EXEMPLO.gif)
-*GIF ou screenshot da app a correr*
-
 **Calcula quanto dinheiro podes ter ao sair da faculdade com base nos teus hábitos e escolhas financeiras.**
 
 ---
