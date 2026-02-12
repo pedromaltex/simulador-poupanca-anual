@@ -64,6 +64,18 @@ with tab1:
                 Revê despesas fixas primeiro (renda e carro).
                 Depois corta onde não traz verdadeiro valor.
                 """)
+        else:
+            # ✅ NOVO: Percentagem de poupança do salário
+            taxa_poupanca = (poupanca_mensal / rendimento_mensal) * 100
+            st.subheader(f"💡 Estás a poupar {taxa_poupanca:.1f}% do teu salário")
+
+            # Mensagem de avaliação
+            if taxa_poupanca < 10:
+                st.warning("Zona de risco. Pequenas mudanças agora evitam problemas futuros.")
+            elif taxa_poupanca < 25:
+                st.info("Caminho saudável. A consistência será o fator decisivo.")
+            else:
+                st.success("Excelente disciplina financeira. O tempo está a trabalhar para ti.")
 
 # =====================================================
 # TAB 2 — RESULTADOS
@@ -73,7 +85,7 @@ with tab2:
 
     st.header("📈 Parâmetros de Investimento")
 
-    taxa_retorno = st.slider("Taxa de retorno anual (%)", 0.0, 15.0, 7.0)
+    taxa_retorno = st.slider("Taxa de retorno anual (%)", 0.0, 15.0, 7.0, 0.5)
     anos = st.slider("Anos até à reforma", 1, 50, 30)
 
     poupanca_anual = poupanca_mensal * 12
@@ -89,20 +101,8 @@ with tab2:
     st.header("📊 Resultados")
 
     if poupanca_mensal <= 0:
-        st.error("Sem poupança não há crescimento. Primeiro cria margem mensal.")
+        st.error("Só podes investir depois de poupares!")
     else:
-        # ✅ NOVO: Percentagem de poupança do salário
-        taxa_poupanca = (poupanca_mensal / rendimento_mensal) * 100
-        st.subheader(f"💡 Estás a poupar {taxa_poupanca:.1f}% do teu salário")
-
-        # Mensagem de avaliação
-        if taxa_poupanca < 10:
-            st.warning("Zona de risco. Pequenas mudanças agora evitam problemas futuros.")
-        elif taxa_poupanca < 25:
-            st.info("Caminho saudável. A consistência será o fator decisivo.")
-        else:
-            st.success("Excelente disciplina financeira. O tempo está a trabalhar para ti.")
-
         # Detalhes
         st.success(f"Poupança anual: {poupanca_anual:.2f} €")
         st.success(f"Valor estimado ao fim de {anos} anos: {valor_futuro:,.2f} €")
@@ -114,6 +114,14 @@ with tab2:
             y=evolucao,
             mode='lines',
             name='Património acumulado'
+        ))
+
+        fig.add_trace(go.Scatter(
+            x=list(range(1, anos + 1)),
+            y=list(range(int(poupanca_anual), int(poupanca_anual)*(anos + 1), int(poupanca_anual))),
+            mode='markers',
+            name='Montante Investido',
+
         ))
 
         fig.update_layout(
