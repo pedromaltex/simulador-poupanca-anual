@@ -1,7 +1,7 @@
 import streamlit as st
 import numpy as np
 import plotly.graph_objects as go
-
+from aux_functions import footer
 
 st.set_page_config(page_title="💰 O Mesmo Salário, Duas Vidas Diferentes", layout="centered")
 
@@ -133,22 +133,4 @@ with tab2:
 
         st.plotly_chart(fig, use_container_width=True)
 
-import streamlit.components.v1 as components
-
-components.html(
-    """
-    <script type="text/javascript"
-        src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js"
-        data-name="bmc-button"
-        data-slug="pedromoraia"
-        data-color="#FFDD00"
-        data-emoji=""
-        data-font="Cookie"
-        data-text="Ajuda-nos a ajudar"
-        data-outline-color="#000000"
-        data-font-color="#000000"
-        data-coffee-color="#ffffff">
-    </script>
-    """,
-    height=80
-)
+footer()
